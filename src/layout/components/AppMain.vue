@@ -3,7 +3,7 @@
     <!-- 带有切换动画，并且具备组件缓存功能 -->
     <router-view v-slot="{ Component, route }">
       <Transition name="fade-transform" mode="out-in">
-        <div>
+        <div v-if="Component">
           <keep-alive>
             <component :is="Component" :key="route.path" />
           </keep-alive>
