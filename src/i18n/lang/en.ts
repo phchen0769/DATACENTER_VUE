@@ -51,7 +51,11 @@ export default {
     recordRanking: 'Record List',
     recordCreate: 'Record Create',
     recordDetail: 'Record Detail',
-    recordEditor: 'Record Editor'
+    recordEditor: 'Record Editor',
+    finance: 'Finance Management',
+    financeList: 'Dividend List',
+    dividendList: 'Dividend List',
+    dividendCreate: 'Create Dividend'
   },
   toast: {
     switchLangSuccess: 'Switch Language Success'

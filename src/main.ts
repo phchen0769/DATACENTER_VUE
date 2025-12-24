@@ -3,7 +3,6 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-import store from './store'
 import i18n from '@/i18n'
 import installElementPlus from './plugins/element'
 // 导入svgIcon
@@ -14,24 +13,21 @@ import SvgIcon from '@/components/SvgIcon/index.vue'
 // 初始化样式表
 import '@/styles/reset.scss'
 
-// 视频通话样式
-import '@/views/video-call/style.scss'
 
 // 导入路由守卫
 import '@/permission'
 
 // 创建vue实例
 const app = createApp(App)
+
+// 在vue实例中挂载pinia
+app.use(createPinia())
 // 使用installElementPlus插件
 installElementPlus(app)
 
 // installIcons(app)
 app.component('svg-icon', SvgIcon)
 
-// 在vue实例中挂载store
-app.use(store)
-// 在vue实例中挂载pinia
-app.use(createPinia())
 // 在vue实例中挂载router
 app.use(router)
 // 在vue实例中挂载i18n

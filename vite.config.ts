@@ -17,7 +17,7 @@ export default defineConfig({
       // 天坑!!!!!，此处位置必须和.env.development中的VITE_BASE_API一致,否则代理不生效
       '/api': {
         // 要代理的地址
-        target: 'http://10.165.27.210:8000/',
+        target: 'http://10.178.34.133:8000/',
         // target: 'http://192.168.12.166:8000/',
         // 允许跨域
         changeOrigin: true

@@ -10,22 +10,22 @@
       <!-- 头像 -->
       <div class="box-center">
         <pan-thumb
-          :image="$store.getters.userInfo.avatar"
+          :image="gettersStore.userInfo.avatar"
           :height="'100px'"
           :width="'100px'"
           :hoverable="false"
         >
           <div>Hello</div>
-          {{ $store.getters.userInfo.title }}
+          {{ gettersStore.userInfo.title }}
         </pan-thumb>
       </div>
       <!-- 姓名 && 角色 -->
       <div class="box-center">
         <div class="user-name text-center">
-          {{ $store.getters.userInfo.username }}
+          {{ gettersStore.userInfo.username }}
         </div>
         <div class="user-role text-center text-muted">
-          {{ $store.getters.userInfo.title }}
+          {{ gettersStore.userInfo.title }}
         </div>
       </div>
     </div>
@@ -43,28 +43,14 @@
         </div>
       </div>
     </div>
-
-    <div class="project-bio-section">
-      <div class="project-bio-section-header">
-        <svg-icon icon="reward" /><span>{{ $t('msg.profile.projectFunction') }}</span>
-      </div>
-      <div class="project-bio-section-body">
-        <div class="progress-item" v-for="item in features" :key="item ? item.id : undefined">
-          <div>{{ item ? item.title : undefined }}</div>
-          <el-progress :percentage="item ? item.percentage : undefined" status="success" />
-        </div>
-      </div>
-    </div>
   </el-card>
 </template>
+
 <script setup>
 import PanThumb from '@/components/PanThumb/index.vue'
-defineProps({
-  features: {
-    type: Array,
-    required: true
-  }
-})
+import { useGettersStore } from '@/stores/getters'
+
+const gettersStore = useGettersStore()
 </script>
 
 <style lang="scss" scoped>

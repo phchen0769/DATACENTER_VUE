@@ -4,7 +4,7 @@ import request from '@/utils/request'
  * 获取文章列表数据, data是查询参数page,limit,key等
  *
  */
-export const getArticleListAPI = (data) => {
+export const getArticleListAPI = (data: any) => {
   return request({
     url: '/articles',
     method: 'GET',
@@ -12,7 +12,7 @@ export const getArticleListAPI = (data) => {
   })
 }
 
-export const getArticleDetailAPI = (id) => {
+export const getArticleDetailAPI = (id: number) => {
   return request({
     url: `/articles/${id}`,
     method: 'GET'
@@ -22,7 +22,7 @@ export const getArticleDetailAPI = (id) => {
 /**
  * 添加文章数据
  */
-export const postArticleAPI = (data) => {
+export const postArticleAPI = (data: any) => {
   return request({
     url: '/articles',
     method: 'POST',
@@ -33,7 +33,7 @@ export const postArticleAPI = (data) => {
 /**
  * 更新文章数据
  */
-export const updateArticleAPI = (id, data) => {
+export const updateArticleAPI = (id: number, data: any) => {
   return request({
     url: `/articles/${id}`,
     method: 'PATCH',
@@ -44,7 +44,7 @@ export const updateArticleAPI = (id, data) => {
 /**
  * 删除文章数据
  */
-export const deleteArticleAPI = (id) => {
+export const deleteArticleAPI = (id: number) => {
   return request({
     url: `/articles/${id}`,
     method: 'DELETE'

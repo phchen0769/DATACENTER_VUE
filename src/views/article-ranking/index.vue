@@ -6,7 +6,7 @@
         <el-checkbox-group v-model="selectDynamicLabel">
           <el-checkbox
             v-for="(item, index) in dynamicData"
-            :label="item.label"
+            :value="item.label"
             :key="index"
             >{{ item.label }}</el-checkbox
           >

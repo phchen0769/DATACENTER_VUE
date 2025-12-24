@@ -1,4 +1,4 @@
-import layout from '@/layout'
+import layout from '@/layout/index.vue'
 
 export default {
   path: '/user',
@@ -12,7 +12,7 @@ export default {
   children: [
     {
       path: '/user/role',
-      component: () => import('@/views/role-list/index'),
+      component: () => import('@/views/role-list/index.vue'),
       meta: {
         title: 'roleList',
         icon: 'role'

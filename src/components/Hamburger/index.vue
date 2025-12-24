@@ -8,17 +8,17 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { useAppStore } from '@/stores/app'
 
-const store = useStore()
+const appStore = useAppStore()
 
 // 触发triggerSidebarOpened函数
 const toggleClick = () => {
-  store.commit('app/triggerSidebarOpened')
+  appStore.triggerSidebarOpened()
 }
 
 // 根据sidebarOpened的值设置图标
-const icon = computed(() => (store.getters.sidebarOpened ? 'hamburger-opened' : 'hamburger-closed'))
+const icon = computed(() => (appStore.getSidebarOpened ? 'hamburger-opened' : 'hamburger-closed'))
 </script>
 
 <style lang="scss" scoped>

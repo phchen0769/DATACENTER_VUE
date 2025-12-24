@@ -1,5 +1,6 @@
 import axios from 'axios'
-import store from '@/store'
+import { useGettersStore } from '@/stores/getters'
+import { useUserStore } from '@/stores/user'
 import { ElMessage } from 'element-plus'
 import { isTimeOut } from '@/utils/auth'
 
@@ -11,17 +12,34 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
-    // 在请求头中添加token
-    if (store.getters.token) {
-      if (isTimeOut()) {
-        // 如果超时，跳转到登录页
-        store.dispatch('user/logout')
-        return Promise.reject(new Error('token超时,请重新登录'))
+    // 使用try/catch确保即使store未初始化也不会报错
+    try {
+      const gettersStore = useGettersStore()
+      const userStore = useUserStore()
+      // 在请求头中添加token
+      const token = gettersStore.token || userStore.getToken
+      if (token) {
+        if (isTimeOut()) {
+          // 如果超时，跳转到登录页
+          userStore.logout()
+          return Promise.reject(new Error('token超时,请重新登录'))
+        }
+        config.headers.Authorization = `Bearer ${token}`
       }
-      config.headers.Authorization = `Bearer ${store.getters.token}`
+    } catch (error) {
+      // store可能尚未初始化，忽略错误
+      console.warn('Store not initialized yet:', error)
     }
+    
     // 配置接口国际化
-    config.headers['Accept-Language'] = store.getters.language
+    try {
+      const gettersStore = useGettersStore()
+      config.headers['Accept-Language'] = gettersStore.language
+    } catch (error) {
+      // store可能尚未初始化，默认使用中文
+      config.headers['Accept-Language'] = 'zh'
+    }
+    
     return config
   },
   (error) => {
@@ -49,9 +67,10 @@ service.interceptors.response.use(
   },
   //  响应失败
   (error) => {
+    const userStore = useUserStore()
     // token超时
     if (error.response && error.response.data && error.response.data.code === 401) {
-      store.dispatch('user/logout')
+      userStore.logout()
       return Promise.reject(error)
     }
     ElMessage.error(error.message)

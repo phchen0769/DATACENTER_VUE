@@ -51,7 +51,11 @@ export default {
     recordRanking: '记录列表',
     recordCreate: '创建记录',
     recordDetail: '记录详情',
-    recordEditor: '记录编辑'
+    recordEditor: '记录编辑',
+    finance: '财务管理',
+    financeList: '分红列表',
+    dividendList: '分红列表',
+    dividendCreate: '创建分红'
   },
   toast: {
     switchLangSuccess: '切换语言成功'

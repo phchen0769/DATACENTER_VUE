@@ -1,9 +1,11 @@
-import store from '@/store'
+import { useGettersStore } from '@/stores/getters'
+
 function checkPermission(el, binding) {
   // 获取按钮权限
   const { value } = binding
   // 获取用户所有功能权限
-  const points = store.getters && store.getters.userinfo
+  const gettersStore = useGettersStore()
+  const points = gettersStore.userInfo
 
   console.log(points)
   // value必须是一个数组

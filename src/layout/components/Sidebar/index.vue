@@ -1,9 +1,9 @@
 <template>
   <div class="">
     <div class="logo-container" :style="{ height: logoHeight + 'px' }">
-      <el-avatar :size="logoHeight" shape="square" :src="$store.getters.userInfo.avatar" />
-      <h1 class="logo-title" v-if="$store.getters.sidebarOpened">
-        {{ $store.getters.userInfo.username }}
+      <el-avatar :size="logoHeight" shape="square" :src="gettersStore.userInfo.avatar" />
+      <h1 class="logo-title" v-if="gettersStore.sidebarOpened">
+        {{ gettersStore.userInfo.username }}
       </h1>
     </div>
     <el-scrollbar>
@@ -14,7 +14,9 @@
 
 <script setup>
 import SidebarMenu from './SidebarMenu.vue'
-import {} from 'vue'
+import { useGettersStore } from '@/stores/getters'
+
+const gettersStore = useGettersStore()
 const logoHeight = 44
 </script>
 

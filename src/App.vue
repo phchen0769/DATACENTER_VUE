@@ -2,20 +2,26 @@
   <router-view />
 </template>
 <script setup>
-import { useStore } from 'vuex'
+import { useGettersStore } from '@/stores/getters'
+import { useUserStore } from '@/stores/user'
 import { generateNewStyle, writeNewStyle } from '@/utils/theme'
 import { watchSwitchLang } from '@/utils/i18n'
+import { onMounted } from 'vue'
 
-const store = useStore()
-generateNewStyle(store.getters.mainColor).then((newStyleText) => {
-  writeNewStyle(newStyleText)
-})
+const gettersStore = useGettersStore()
+const userStore = useUserStore()
 
-// 语言切换后,重新获取用户信息
-watchSwitchLang(() => {
-  if (store.getters.token) {
-    store.dispatch('user/getUserInfo')
-  }
+onMounted(() => {
+  generateNewStyle(gettersStore.mainColor).then((newStyleText) => {
+    writeNewStyle(newStyleText)
+  })
+
+  // 语言切换后,重新获取用户信息
+  watchSwitchLang(() => {
+    if (gettersStore.token) {
+      userStore.getUserInfo()
+    }
+  })
 })
 
 // 解决ERROR ResizeObserver loop completed with undelivered notifications.

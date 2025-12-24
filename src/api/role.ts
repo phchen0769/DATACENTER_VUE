@@ -13,7 +13,7 @@ export const getRoleListAPI = () => {
 /**
  * 获取角色权限列表数据
  */
-export const getRolePermissionAPI = (id) => {
+export const getRolePermissionAPI = (id: number) => {
   return request({
     url: `/roles/${id}`,
     method: 'GET'
@@ -28,7 +28,7 @@ export const distributePermission = () => {}
 /**
  * 添加角色数据
  */
-export const updateRoleAPI = (id, data) => {
+export const updateRoleAPI = (id: number, data: any) => {
   return request({
     url: `/roles/${id}`,
     method: 'PATCH',

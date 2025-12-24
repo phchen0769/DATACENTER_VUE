@@ -23,7 +23,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { useGettersStore } from '@/stores/getters'
+import { useThemeStore } from '@/stores/theme'
 import { generateNewStyle, writeNewStyle } from '@/utils/theme'
 defineProps({
   modelValue: {
@@ -51,9 +52,10 @@ const predefineColors = [
   'hsla(209, 100%, 56%, 0.73)',
   '#c7158577'
 ]
-const store = useStore()
+const gettersStore = useGettersStore()
+const themeStore = useThemeStore()
 // 默认色值
-const mColor = ref(store.getters.mainColor)
+const mColor = ref(gettersStore.mainColor)
 
 /**
  * 关闭
@@ -73,7 +75,7 @@ const comfirm = async () => {
   // 1.2 写入最新主题色
   writeNewStyle(newStyleText)
   // 2. 保存最新的主题色
-  store.commit('theme/setMainColor', mColor.value)
+  themeStore.setMainColor(mColor.value)
   // 3. 关闭 dialog
   closed()
 }

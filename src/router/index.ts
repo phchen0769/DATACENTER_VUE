@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import store from '@/store'
+import { useUserStore } from '@/stores/user'
+// import FinanceRouter from './modules/Finance'
 // import ArticleCreaterRouter from './modules/ArticleCreate'
 // import ArticleRouter from './modules/Article'
 // import PermissionListRouter from './modules/PermissionList'
@@ -48,50 +49,46 @@ export const publicRoutes = [
           icon: 'el-icon',
           iconName: 'User'
         }
-      },
-      // 视频通话
-      {
-        path: '/video-call',
-        name: 'video-call',
-        component: () => import('@/views/video-call/index.vue'),
-        meta: {
-          title: 'videoCall',
-          icon: 'article',
-          iconName: 'article'
-        }
-      },
-      // 404
-      {
-        path: '/404',
-        name: '404',
-        component: () => import('@/views/error-page/404.vue')
-      },
-      // 401
-      {
-        path: '/401',
-        name: '401',
-        component: () => import('@/views/error-page/401.vue')
-      },
-      {
-        path: '/:pathMatch(.*)*',
-        name: 'not-found',
-        component: () => import('@/views/error-page/404.vue')
       }
+      // Finance模块
+      // FinanceRouter
     ]
+  },
+  {
+    // 404
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/error-page/404.vue')
+  },
+  // 401
+  {
+    path: '/401',
+    name: '401',
+    component: () => import('@/views/error-page/401.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('@/views/error-page/404.vue')
   }
 ]
+
 const router = createRouter({
   history: createWebHashHistory(),
   // routes: [...publicRoutes, ...privateRoutes]
   // 私有路由从后端传入
   routes: [...publicRoutes]
 })
+
 /**
  * 初始化路由表
  */
 export function resetRouter() {
-  if (store.getters.userInfo && store.getters.userInfo.routers) {
-    const menus = store.getters.userInfo.routers
+  const userStore = useUserStore()
+  if (userStore.getUserInfo && userStore.getUserInfo.routers) {
+    const menus = userStore.getUserInfo.routers
+    console.log('Dynamic menus to register:', JSON.stringify(menus, null, 2))
+    
     menus.forEach((menu: any) => {
       if (menu.children) {
         // 如果存在子路由，分别移除每一个子路由
@@ -103,6 +100,7 @@ export function resetRouter() {
       router.removeRoute(menu.name)
     })
   }
-  console.log(router.getRoutes())
+  console.log('Current routes after reset:', router.getRoutes())
 }
+
 export default router

@@ -44,7 +44,8 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { useGettersStore } from '@/stores/getters'
+import { useUserStore } from '@/stores/user'
 import Hamburger from '@/components/Hamburger/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
@@ -53,12 +54,13 @@ import ScreenFull from '@/components/Screenfull/index.vue'
 import HeaderSearch from '@/components/HeaderSearch/index.vue'
 import Guide from '@/components/Guide/index.vue'
 
-const store = useStore()
+const gettersStore = useGettersStore()
+const userStore = useUserStore()
 // 设置计算属性，获取用户信息，用于显示头像
-const userInfo = computed(() => store.getters.userInfo)
+const userInfo = computed(() => gettersStore.userInfo)
 const logout = () => {
   // 触发退出登录动作
-  store.dispatch('user/logout')
+  userStore.logout()
 }
 </script>
 

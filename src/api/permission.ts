@@ -3,7 +3,7 @@ import request from '@/utils/request'
 /**
  * 获取权限列表数据, data是查询参数page,limit,key等
  */
-export const getPermissionListAPI = (data) => {
+export const getPermissionListAPI = (data: any) => {
   return request({
     url: '/permissions',
     method: 'GET',
@@ -23,7 +23,7 @@ export const getPermissionALLAPI = () => {
 /**
  * 添加权限数据
  */
-export const postPermissionAPI = (data) => {
+export const postPermissionAPI = (data: any) => {
   return request({
     url: '/permissions',
     method: 'POST',
@@ -34,7 +34,7 @@ export const postPermissionAPI = (data) => {
 /**
  * 更新权限数据
  */
-export const updatePermissionAPI = (id, data) => {
+export const updatePermissionAPI = (id: number, data: any) => {
   return request({
     url: `/permissions/${id}`,
     method: 'PATCH',
@@ -42,7 +42,7 @@ export const updatePermissionAPI = (id, data) => {
   })
 }
 
-export const deletePermissionAPI = (id) => {
+export const deletePermissionAPI = (id: number) => {
   return request({
     url: `/permissions/${id}`,
     method: 'DELETE'

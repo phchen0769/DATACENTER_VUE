@@ -1,4 +1,3 @@
-import { SETTINGS_VIDEO } from '@/views/video-call/enum'
 import { defineStore } from 'pinia'
 import type { UserItem } from './type'
 
@@ -10,7 +9,6 @@ export const useUserInfo = defineStore('userInfo', {
       userList: [] as UserItem[],
       // 设置参数
       settings: {
-        video: SETTINGS_VIDEO.USER, // 视频类型
         localAudio: true, // 本地声音
         remoteAudio: true, // 对方声音
         localVideo: true, // 本地视频

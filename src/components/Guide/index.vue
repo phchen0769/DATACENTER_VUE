@@ -12,9 +12,10 @@ import 'driver.js/dist/driver.css'
 import { onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import getSteps from './steps'
-import store from '@/store'
+import { useGettersStore } from '@/stores/getters'
 
 const i18n = useI18n()
+const gettersStore = useGettersStore()
 
 // driver配置
 const config = {
@@ -44,7 +45,7 @@ onMounted(() => {
 
 // 监听语言变化
 watch(
-  () => store.getters.language,
+  () => gettersStore.language,
   () => {
     // 监听语言变化
     driverObj.setSteps(getSteps(i18n))

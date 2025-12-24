@@ -5,10 +5,10 @@
         class="tags-view-item"
         :class="isActive(tag) ? 'active' : ''"
         :style="{
-          backgroundColor: isActive(tag) ? $store.getters.cssVar.menuBg : '',
-          borderColor: isActive(tag) ? $store.getters.cssVar.menuBg : ''
+          backgroundColor: isActive(tag) ? gettersStore.cssVar.menuBg : '',
+          borderColor: isActive(tag) ? gettersStore.cssVar.menuBg : ''
         }"
-        v-for="(tag, index) in $store.getters.tagsViewList"
+        v-for="(tag, index) in gettersStore.tagsViewList"
         :key="tag.fullPath"
         :to="{ path: tag.fullPath }"
         @contextmenu.prevent="openMenu($event, index)"
@@ -31,9 +31,13 @@
 import ContextMenu from './ContextMenu.vue'
 import { ref, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
+import { useGettersStore } from '@/stores/getters'
+import { useAppStore } from '@/stores/app'
 
 const route = useRoute()
+const gettersStore = useGettersStore()
+const appStore = useAppStore()
+
 /**
  * 是否被选中
  */
@@ -44,9 +48,8 @@ const isActive = (tag) => {
 /**
  * 关闭 tag 的点击事件
  */
-const store = useStore()
 const onCloseClick = (index) => {
-  store.commit('app/removeTagsView', {
+  appStore.removeTagsView({
     type: 'index',
     index: index
   })

@@ -3,7 +3,7 @@ import request from '@/utils/request'
 /**
  * 获取用户列表数据
  */
-export const getUserManageList = (data) => {
+export const getUserManageList = (data: any) => {
   return request({
     url: '/users',
     params: data,
@@ -22,7 +22,7 @@ export const getUserManageAllList = () => {
 /**
  * 批量导入
  */
-export const userBatchImport = (data) => {
+export const userBatchImport = (data: any) => {
   return request({
     url: '/user-manage/batch/import',
     method: 'POST',
@@ -32,7 +32,7 @@ export const userBatchImport = (data) => {
 /**
  * 删除指定数据
  */
-export const deleteUserAPI = (id) => {
+export const deleteUserAPI = (id: number) => {
   return request({
     url: `/users/${id}`,
     method: 'DELETE'
@@ -41,7 +41,7 @@ export const deleteUserAPI = (id) => {
 /**
  * 获取用户详情
  */
-export const getUserDetailAPI = (id) => {
+export const getUserDetailAPI = (id: number) => {
   return request({
     url: `/users/${id}`,
     method: 'GET'
@@ -51,7 +51,7 @@ export const getUserDetailAPI = (id) => {
 /**
  * 为用户分配角色
  */
-export const updateRole = (id, role) => {
+export const updateRole = (id: number, role: any) => {
   return request({
     url: `/users/${id}`,
     method: 'PATCH',

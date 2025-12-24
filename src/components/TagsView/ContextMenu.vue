@@ -14,7 +14,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import { useAppStore } from '@/stores/app'
 const props = defineProps({
   index: {
     type: Number,
@@ -26,16 +26,16 @@ const onRefreshClick = () => {
   router.go(0)
 }
 
-const store = useStore()
+const appStore = useAppStore()
 const onCloseRightClick = () => {
-  store.commit('app/removeTagsView', {
+  appStore.removeTagsView({
     type: 'right',
     index: props.index
   })
 }
 
 const onCloseOtherClick = () => {
-  store.commit('app/removeTagsView', {
+  appStore.removeTagsView({
     type: 'other',
     index: props.index
   })

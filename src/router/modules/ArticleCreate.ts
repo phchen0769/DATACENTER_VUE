@@ -1,4 +1,4 @@
-import layout from '@/layout'
+import layout from '@/layout/index.vue'
 
 export default {
   path: '/article',
@@ -9,7 +9,7 @@ export default {
   children: [
     {
       path: '/article/create',
-      component: () => import('@/views/article-create/index'),
+      component: () => import('@/views/article-create/index.vue'),
       meta: {
         title: 'articleCreate',
         icon: 'article-create'
@@ -17,7 +17,7 @@ export default {
     },
     {
       path: '/article/editor/:id',
-      component: () => import('@/views/article-create/index'),
+      component: () => import('@/views/article-create/index.vue'),
       meta: {
         title: 'articleEditor'
       }

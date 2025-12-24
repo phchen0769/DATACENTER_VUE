@@ -27,7 +27,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { useAppStore } from '@/stores/app'
 import { ElMessage } from 'element-plus'
 
 defineProps({
@@ -42,16 +42,16 @@ defineProps({
   }
 })
 
-const store = useStore()
-const language = computed(() => store.getters.language)
+const appStore = useAppStore()
+const language = computed(() => appStore.getLanguage)
 
 // 切换语言的方法
 const i18n = useI18n()
 const handleSetLanguage = (lang) => {
   // 最新的语言设置
   i18n.locale.value = lang
-  // 更新 Vuex 中的语言设置
-  store.commit('app/setLanguage', lang)
+  // 更新 store 中的语言设置
+  appStore.setLanguage(lang)
   // 提示切换成功
   ElMessage.success(i18n.t('msg.toast.switchLangSuccess'))
 }

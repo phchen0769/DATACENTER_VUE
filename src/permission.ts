@@ -1,5 +1,5 @@
 import router from '@/router'
-import store from '@/store'
+import { useUserStore } from '@/stores/user'
 import { computed } from 'vue'
 import { arrayToRouter } from '@/utils/router'
 
@@ -13,48 +13,42 @@ const whiteList = ['/login']
  * @param {*} next 是否要去
  */
 router.beforeEach(async (to, from, next) => {
-  // 从vuex（快捷路径）中获取token
-  // if(store.state.user.token)
-  if (store.getters.token) {
+  // 获取用户store实例
+  const userStore = useUserStore()
+
+  // 从store中获取token
+  if (userStore.getToken) {
     // 1、用户已登录，则不允许进入login
     if (to.path === '/login') {
       next('/')
+      return
     } else {
       // 判断用户信息是否存在，如不存在，则获取用户信息
-      if (!store.getters.hasUserInfo) {
-        await store.dispatch('user/fetchUserInfo')
+      if (!userStore.hasUserInfo) {
+        try {
+          await userStore.fetchUserInfo()
 
-        // console.log(store.getters.userInfo)
-        // 设置计算属性，获取用户路由
-        const privateRoutes = computed(() => {
-          return arrayToRouter(store.getters.userInfo.routers)
-        })
-        // 后端控制路由：私有动态路由，赋值给vue-router
-        privateRoutes.value.forEach((item) => {
-          router.addRoute(item)
-          // trigger a redirection
-          return to.fullPath
-        })
+          // 设置计算属性，获取用户路由
+          const privateRoutes = computed(() => {
+            return arrayToRouter(userStore.getUserInfo.routers)
+          })
 
-        // 不强制进行跳转，浏览器刷新后会找不到页面
-        // 此时已添加了后端返回的动态路由，进行跳转一次
-        // if (privateRoutes.value) {
-        //   // 此处 next 里就不可用 ...to，因为 to 是临时路由
-        //   next({ path: to.path, query: to.query, replace: true })
-        // } else {
-        //   next({ ...to, replace: true })
-        // }
-        if (privateRoutes.value) {
-          // 此处 next 里就不可用 ...to，因为 to 是临时路由
-          next({ path: to.path, query: to.query, replace: true })
-          return
-        } else {
+          // 后端控制路由：私有动态路由，赋值给vue-router
+          privateRoutes.value.forEach((item) => {
+            router.addRoute(item)
+          })
+
+          // 重新导航到目标路由
           next({ ...to, replace: true })
-          return
+        } catch (error) {
+          // 获取用户信息失败，重定向到登录页
+          next('/login')
         }
+      } else {
+        // 用户信息已存在，直接放行
+        next()
       }
     }
-    next()
   } else {
     // 2、用户未登录，则只允许进入login
     if (whiteList.indexOf(to.path) !== -1) {

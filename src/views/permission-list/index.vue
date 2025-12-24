@@ -2,16 +2,16 @@
   <div class="permission-container">
     <el-card>
       <el-table :data="permissionList" border style="width: 100%">
-        <el-table-column :label="$t('msg.permission.num')" prop="id" width="60" />
+        <el-table-column :aria-label="$t('msg.permission.num')" prop="id" width="60" />
         <!-- 权限名称 -->
-        <el-table-column prop="name" :label="$t('msg.permission.name')" />
+        <el-table-column prop="name" :aria-label="$t('msg.permission.name')" />
         <!-- 方法 -->
-        <el-table-column prop="method" :label="$t('msg.permission.method')" />
+        <el-table-column prop="method" :aria-label="$t('msg.permission.method')" />
         <!-- 描述 -->
-        <el-table-column prop="desc" :label="$t('msg.universal.desc')" />
+        <el-table-column prop="desc" :aria-label="$t('msg.universal.desc')" />
         <!-- 所属路由 -->
-        <el-table-column prop="router" :label="$t('msg.permission.router')" />
-        <el-table-column :label="$t('msg.universal.action')" fixed="right" width="260">
+        <el-table-column prop="router" :aria-label="$t('msg.permission.router')" />
+        <el-table-column :aria-label="$t('msg.universal.action')" fixed="right" width="260">
           <template #default="{ row }">
             <!-- v-permission="['distributeRole']" -->
             <!-- v-permission="['removeUser']" -->
@@ -50,19 +50,19 @@
     width="500"
   >
     <el-form v-model="selectPermission">
-      <el-form-item :label="$t('msg.permission.num')" label-width="140px">
+      <el-form-item :aria-label="$t('msg.permission.num')" label-width="140px">
         <el-input v-model="selectPermission.id" autocomplete="off" />
       </el-form-item>
-      <el-form-item :label="$t('msg.permission.name')" label-width="140px">
+      <el-form-item :aria-label="$t('msg.permission.name')" label-width="140px">
         <el-input v-model="selectPermission.name" autocomplete="off" />
       </el-form-item>
-      <el-form-item :label="$t('msg.permission.method')" label-width="140px">
+      <el-form-item :aria-label="$t('msg.permission.method')" label-width="140px">
         <el-input v-model="selectPermission.method" autocomplete="off" />
       </el-form-item>
-      <el-form-item :label="$t('msg.universal.desc')" label-width="140px">
+      <el-form-item :aria-label="$t('msg.universal.desc')" label-width="140px">
         <el-input v-model="selectPermission.desc" autocomplete="off" />
       </el-form-item>
-      <el-form-item :label="$t('msg.permission.router')" label-width="140px">
+      <el-form-item :aria-label="$t('msg.permission.router')" label-width="140px">
         <el-select
           v-model="selectPermission.router"
           :placeholder="$t('msg.permission.selectRouterDialog')"
@@ -95,19 +95,19 @@
     width="500"
   >
     <el-form v-model="selectPermission">
-      <el-form-item :label="$t('msg.permission.num')" label-width="140px">
+      <el-form-item :aria-label="$t('msg.permission.num')" label-width="140px">
         {{ selectPermission.id }}
       </el-form-item>
-      <el-form-item :label="$t('msg.permission.name')" label-width="140px">
+      <el-form-item :aria-label="$t('msg.permission.name')" label-width="140px">
         <el-input v-model="selectPermission.name" autocomplete="off" />
       </el-form-item>
-      <el-form-item :label="$t('msg.permission.method')" label-width="140px">
+      <el-form-item :aria-label="$t('msg.permission.method')" label-width="140px">
         <el-input v-model="selectPermission.method" autocomplete="off" />
       </el-form-item>
-      <el-form-item :label="$t('msg.universal.desc')" label-width="140px">
+      <el-form-item :aria-label="$t('msg.universal.desc')" label-width="140px">
         <el-input v-model="selectPermission.desc" autocomplete="off" />
       </el-form-item>
-      <el-form-item :label="$t('msg.permission.router')" label-width="140px">
+      <el-form-item :aria-label="$t('msg.permission.router')" label-width="140px">
         <el-select
           v-model="selectPermission.router"
           :placeholder="$t('msg.permission.selectRouterDialog')"

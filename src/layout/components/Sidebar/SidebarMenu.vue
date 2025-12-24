@@ -1,10 +1,10 @@
 <template>
   <!-- 一级 menu 菜单 -->
   <el-menu
-    :collapse="!$store.getters.sidebarOpened"
-    :background-color="$store.getters.cssVar.menuBg"
-    :text-color="$store.getters.cssVar.menuText"
-    :active-text-color="$store.getters.cssVar.menuActiveText"
+    :collapse="!gettersStore.sidebarOpened"
+    :background-color="gettersStore.cssVar.menuBg"
+    :text-color="gettersStore.cssVar.menuText"
+    :active-text-color="gettersStore.cssVar.menuActiveText"
     :default-active="activeMenu"
     :unique-opened="true"
     router
@@ -17,6 +17,9 @@
 import SidebarItem from './SidebarItem.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { computed } from 'vue'
+import { useGettersStore } from '@/stores/getters'
+
+const gettersStore = useGettersStore()
 
 // 导入过滤函数
 import { filterRouters, generateMenus } from '@/utils/menus'

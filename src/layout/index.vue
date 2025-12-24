@@ -1,7 +1,7 @@
 <template>
-  <div class="app-wrapper" :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']">
+  <div class="app-wrapper" :class="[gettersStore.sidebarOpened ? 'openSidebar' : 'hideSidebar']">
     <!-- 左侧 menu-->
-    <sidebar class="sidebar-container" :style="{ backgroundColor: $store.getters.cssVar.menuBg }" />
+    <sidebar class="sidebar-container" :style="{ backgroundColor: gettersStore.cssVar.menuBg }" />
     <!-- 右侧内容 -->
     <div class="main-container">
       <div class="fixed-header">
@@ -17,11 +17,13 @@
 </template>
 
 <script setup>
-import {} from 'vue'
-import Navbar from './components/Navbar.vue'
+import { useGettersStore } from '@/stores/getters'
 import Sidebar from './components/Sidebar/index.vue'
-import AppMain from './components/AppMain.vue'
+import Navbar from './components/Navbar.vue'
 import TagsView from '@/components/TagsView/index.vue'
+import AppMain from './components/AppMain.vue'
+
+const gettersStore = useGettersStore()
 </script>
 
 <style lang="scss" scoped>

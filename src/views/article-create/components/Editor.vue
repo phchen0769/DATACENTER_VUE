@@ -10,7 +10,7 @@
 <script setup>
 import E from 'wangeditor'
 import i18next from 'i18next'
-import { useStore } from 'vuex'
+import { useGettersStore } from '@/stores/getters'
 import { onMounted, watch } from 'vue'
 import { commitArticle, editArticle } from './commit'
 
@@ -30,7 +30,7 @@ let editor
 // 处理离开页面切换语言导致 dom 无法被获取
 let el
 
-const store = useStore()
+const gettersStore = useGettersStore()
 const initEditor = () => {
   editor = new E(el)
   editor.config.zIndex = 1
@@ -38,7 +38,7 @@ const initEditor = () => {
   editor.config.showMenuTooltips = true
   editor.config.menuTooltipPosition = 'down'
   // 国际化相关处理
-  editor.config.lang = store.getters.language === 'zh' ? 'zh-CN' : 'en'
+  editor.config.lang = gettersStore.language === 'zh' ? 'zh-CN' : 'en'
   editor.i18next = i18next
 
   editor.create()

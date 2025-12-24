@@ -16,11 +16,15 @@
 <script setup>
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
-import store from '@/store'
+import { useAppStore } from '@/stores/app'
+import { useGettersStore } from '@/stores/getters'
 import { inWhiteList } from '@/utils/tags'
 import { generateTitle, watchSwitchLang } from '@/utils/i18n'
 
 const route = useRoute()
+const appStore = useAppStore()
+const gettersStore = useGettersStore()
+
 /**
  * 生成title
  */
@@ -43,7 +47,7 @@ watch(
     // 不在白名单时，添加tags
     if (inWhiteList(to.path)) return
     const { fullPath, meta, name, params, path, query } = to
-    store.commit('app/addTagsViewList', {
+    appStore.addTagsViewList({
       fullPath,
       meta,
       name,
@@ -56,22 +60,23 @@ watch(
   {
     // 立即执行，用于初始化
     immediate: true
-  },
-  /**
-   * 国际化 tags
-   */
-  watchSwitchLang(() => {
-    store.getters.tagsViewList.forEach((route, index) => {
-      store.commit('app/changeTagsView', {
-        index,
-        tag: {
-          ...route,
-          title: getTitle(route)
-        }
-      })
+  }
+)
+
+/**
+ * 国际化 tags
+ */
+watchSwitchLang(() => {
+  gettersStore.tagsViewList.forEach((route, index) => {
+    appStore.changeTagsView({
+      index,
+      tag: {
+        ...route,
+        title: getTitle(route)
+      }
     })
   })
-)
+})
 </script>
 
 <style lang="scss" scoped>

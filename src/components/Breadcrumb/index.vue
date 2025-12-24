@@ -19,7 +19,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import { useGettersStore } from '@/stores/getters'
 import { generateTitle } from '@/utils/i18n'
 
 const route = useRoute()
@@ -50,9 +50,9 @@ const onLinkClick = (item) => {
 }
 
 // 将来需要进行主题替换，所以这里获取下动态样式
-const store = useStore()
+const gettersStore = useGettersStore()
 // eslint-disable-next-line
-const linkHoverColor = ref(store.getters.cssVar.menuBg)
+const linkHoverColor = ref(gettersStore.cssVar.menuBg)
 </script>
 
 <style lang="scss" scoped>

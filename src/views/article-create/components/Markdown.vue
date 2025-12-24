@@ -15,7 +15,7 @@ import MkEditor from '@toast-ui/editor'
 import '@toast-ui/editor/dist/toastui-editor.css'
 import '@toast-ui/editor/dist/i18n/zh-cn'
 import { onMounted, watch, ref } from 'vue'
-import { useStore } from 'vuex'
+import { useGettersStore } from '@/stores/getters'
 import { watchSwitchLang } from '@/utils/i18n'
 import { commitArticle, editArticle } from './commit'
 import { getArticleListAPI } from '@/api/article'
@@ -39,13 +39,13 @@ onMounted(() => {
   initEditor()
 })
 
-const store = useStore()
+const gettersStore = useGettersStore()
 const initEditor = () => {
   mkEditor = new MkEditor({
     el,
     height: '500px',
     previewStyle: 'vertical',
-    language: store.getters.language === 'zh' ? 'zh-CN' : 'en'
+    language: gettersStore.language === 'zh' ? 'zh-CN' : 'en'
   })
 
   mkEditor.getMarkdown()

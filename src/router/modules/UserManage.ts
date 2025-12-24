@@ -1,4 +1,4 @@
-import layout from '@/layout'
+import layout from '@/layout/index.vue'
 
 export default {
   path: '/user',
@@ -12,7 +12,7 @@ export default {
   children: [
     {
       path: '/user/manage',
-      component: () => import('@/views/user-manage/index'),
+      component: () => import('@/views/user-manage/index.vue'),
       meta: {
         title: 'userManage',
         icon: 'personnel-manage'
@@ -21,7 +21,7 @@ export default {
     {
       path: '/user/info/:id',
       name: 'userInfo',
-      component: () => import('@/views/user-info/index'),
+      component: () => import('@/views/user-info/index.index.vue'),
       props: true,
       meta: {
         title: 'userInfo'
@@ -30,7 +30,7 @@ export default {
     {
       path: '/user/import',
       name: 'import',
-      component: () => import('@/views/import/index'),
+      component: () => import('@/views/import/index.vue'),
       meta: {
         title: 'excelImport'
       }
